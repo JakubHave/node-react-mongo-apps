@@ -1,0 +1,22 @@
+<%- include("partials/header"); -%>
+    <h1>Your personal diary</h1>
+    <p> <%= diaryContent %> </p>
+
+    <%  posts.forEach(function(post){ %>
+
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6">
+          <h3 class="text-break"><%=post.title%></h3>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6">
+          <p style="margin-top: 20px"><%=post.date%></p>
+        </div>
+      </div>
+      <p>
+      <%=post.content.substring(0, 50) + " ..."%>
+      <a href="/diary-entries/<%=post._id%>">Read More</a>
+      </p>
+
+
+      <% }) %>
+<%- include("partials/footer"); -%>
