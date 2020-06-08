@@ -11,7 +11,7 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const findOrCreate = require('mongoose-findorcreate');
 const dateFormat = require('dateformat');
 
-const homeContent = "Welcome to your personal diary.";
+const homeContent = "Welcome to Secret Garden - your personal diary.";
 const diaryContent = "Here you can find all your diary entries.";
 const newEntryContent = "Here you can add a new entry to your diary.";
 
@@ -62,7 +62,7 @@ passport.deserializeUser(function(id, done) {
 passport.use(new GoogleStrategy({
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
-    callbackURL: "http://localhost:3000/auth/google/home",
+    callbackURL: process.env.HOST_URL + "/auth/google/home",
     userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
   },
   function(accessToken, refreshToken, profile, cb) {
@@ -226,7 +226,10 @@ app.get("/logout", function(req, res){
   res.redirect("/");
 });
 
-
-app.listen(3000, function() {
-  console.log("Server started on port 3000");
+let port = process.env.PORT;
+if (port == null || port == ""){
+  port = 3000;
+}
+app.listen(port, function() {
+  console.log("Server has started on port " + port);
 });
