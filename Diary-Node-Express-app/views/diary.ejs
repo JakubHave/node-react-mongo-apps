@@ -1,22 +1,39 @@
 <%- include("partials/header"); -%>
-    <h1>Your personal diary</h1>
-    <p> <%= diaryContent %> </p>
 
-    <%  posts.forEach(function(post){ %>
 
-      <div class="row">
-        <div class="col-lg-6 col-md-6 col-sm-6">
-          <h3 class="text-break"><%=post.title%></h3>
-        </div>
-        <div class="col-lg-6 col-md-6 col-sm-6">
-          <p style="margin-top: 20px"><%=post.date%></p>
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-sm-6">
+        <h1>Your personal diary</h1>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-6">
+        <div class="float-right mt-3">
+          <a href="/new-entry" class="btn btn-primary">Create a new diary entry</a>
         </div>
       </div>
-      <p>
-      <%=post.content.substring(0, 50) + " ..."%>
-      <a href="/diary-entries/<%=post._id%>">Read More</a>
-      </p>
+    </div>
+    <p> <%= diaryContent %> </p>
 
+    <div class="diary-entries">
+      <% if (posts.length === 0) { %>
+        <p> You have no diary entries yet. </p>
+      <% } %>
+      <%  posts.forEach(function(post){ %>
 
-      <% }) %>
+        <form name="form<%=post.id%>" class="" action="/delete-entry" method="post">
+          <input type="hidden" name="postId" value="<%=post.id%>">
+          <span class="btn float-right" onclick="form<%=post.id%>.submit()"
+            data-toggle="tooltip" data-placement="right" title="Remove diary entry">
+            <i class="fa fa-times"></i>
+          </span>
+        </form>
+        <p><%=post.date%></p>
+        <p class="text-break font-weight-bold kalam-font"><%=post.title%></p>
+        <p class="kalam-font" >
+          <%=post.content.substring(0, 200) + " ..."%>
+          <a href="/diary-entries/<%=post._id%>">Read More</a>
+        </p>
+        <hr>
+
+        <% }) %>
+      </div>
 <%- include("partials/footer"); -%>
