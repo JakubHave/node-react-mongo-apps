@@ -20,4 +20,4 @@ This app is for writing/removing sticky notes on the wall.
 
 It is basically just a front-end coded in React.
 
-Run `npm start` from its root folder and a browser window with the app will be opened.
+Run `npm install` and `npm start` from its root folder and a browser window with the app will be opened.
