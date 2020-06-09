@@ -34,10 +34,11 @@ app.use(passport.session());
 mongoose.connect("mongodb://localhost:27017/diaryDB", {useNewUrlParser: true,  useUnifiedTopology: true});
 mongoose.set("useCreateIndex", true);
 
+// loggedUserName is user`s email
 let loggedUserName = null;
 
 const userSchema = new mongoose.Schema ({
-  email: String,
+  username: String,
   password: String,
   googleId: String
 });
@@ -67,7 +68,7 @@ passport.use(new GoogleStrategy({
   },
   function(accessToken, refreshToken, profile, cb) {
     loggedUserName = profile.emails[0].value;
-    User.findOrCreate({ googleId: profile.id }, function (err, user) {
+    User.findOrCreate({ googleId: profile.id, username: loggedUserName }, function (err, user) {
       return cb(err, user);
     });
   }
@@ -109,12 +110,13 @@ app.post("/login", function(req, res){
   });
 
   req.login(user, function(err){
+    console.log(user);
     if (err) {
       console.log(err);
       res.redirect("/login");
     } else {
       loggedUserName = user.username;
-      passport.authenticate("local")(req, res, function(){
+      passport.authenticate("local", { failureRedirect: '/login' })(req, res, function(){
         res.redirect("/home");
       });
     }
@@ -133,7 +135,7 @@ app.post("/register", function(req, res){
       res.render("register", {error: err});
     } else {
       loggedUserName = user.username;
-      passport.authenticate("local")(req, res, function(){
+      passport.authenticate("local",{ failureRedirect: '/register' })(req, res, function(){
         res.redirect("/home");
       });
     }
