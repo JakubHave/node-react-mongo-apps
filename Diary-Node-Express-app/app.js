@@ -11,7 +11,7 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const findOrCreate = require('mongoose-findorcreate');
 const dateFormat = require('dateformat');
 
-const homeContent = "Welcome to Secret Garden - your personal diary.";
+const homeContent = "Welcome to your personal diary.";
 const diaryContent = "Here you can find all your diary entries.";
 const newEntryContent = "Here you can add a new entry to your diary.";
 
