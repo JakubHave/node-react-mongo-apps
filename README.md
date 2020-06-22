@@ -1,9 +1,9 @@
 # node-react-mongo-apps
-This repository holds code for sample applications developed Node.js and React.
+This repository holds code for sample applications coded in Node.js and React.
 
 ## Diary-Node-Express-app
 
-This application s called **Secret Garden - your personal diary** and uses Express - Node.js web application framework.
+This application s called **Personal diary** and uses Express - Node.js web application framework.
 
 It is a simple diary application, where users can register/login by email and password or by Oauth2 with their Google account
 and write a diary.
@@ -12,7 +12,7 @@ Authentication/security is done by Passport.js
 
 Users and dairy entries are stored in NoSQL database MongoDB and the connection with database is provided by Mongoose.
 
-The application is deployed and hosted on https://secret-garden-18112.herokuapp.com/ and its database is located on AWS cloud - MongoDB Atlas.
+The application is deployed and hosted on https://diary-by-jakub.herokuapp.com/ and its database is located on AWS cloud - MongoDB Atlas.
 
 ## Notes-React-app
 
